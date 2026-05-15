@@ -17,15 +17,16 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Setup Node
-        uses: actions/checkout@v4
+        uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'npm'
 
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
 
       - name: Build
-        run: npx ng build --base-href /travel-tracker/
+        run: npx ng build --configuration production --base-href /travel-tracker/
 
       - name: Copy index.html to 404.html
         run: cp dist/travel-tracker/browser/index.html dist/travel-tracker/browser/404.html
