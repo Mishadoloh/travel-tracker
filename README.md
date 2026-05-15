@@ -1,59 +1,57 @@
-# TravelTracker
+# Travel Tracker - Технічна документація проекту
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.11.
+Даний проект є реалізацією тестового завдання по створенню автономного додатка для пошуку та відстеження цікавих місць для подорожей.
 
-## Development server
+## 🛠 Виконаний обсяг робіт
 
-To start a local development server, run:
+В ході розробки було реалізовано наступні модулі та функціональні можливості:
 
+1.  **Архітектура даних та API:**
+    *   Реалізовано гібридний рушій пошуку на базі **OpenStreetMap (Overpass API)** та **Wikipedia API**.
+    *   Повна декупелізація від Foursquare API для забезпечення стабільності та незалежності від лімітів платних сервісів.
+    *   Впроваджено систему дзеркал (Mirroring) для автоматичного перемикання між серверами у разі збоїв або мережевих обмежень.
+    *   Реалізовано багаторівневе кешування запитів (`CacheService`) з TTL 10 хвилин.
+
+2.  **Пошуковий інтерфейс:**
+    *   Реалізовано повнотекстовий пошук за категоріями та локаціями.
+    *   Впроваджено інтелектуальне автозаповнення (Autocomplete) з категоріальними іконками.
+    *   Додано функціонал визначення поточної геолокації користувача.
+
+3.  **Візуалізація та деталі:**
+    *   Інтегровано інтерактивну карту на базі **Leaflet.js** з підтримкою темної теми та автоматичним фокусуванням на результатах.
+    *   Реалізовано сторінку деталей місця з розширеними описами (extracts) та фотогалереєю з Вікіпедії.
+    *   Впроваджено систему "Вішліст" з персистентним збереженням у `localStorage`.
+
+4.  **Технічний стек та UI:**
+    *   **Angular 21** (Standalone Components, Signals, Zoneless change detection).
+    *   **UI/UX:** Професійний дизайн у стилі Glassmorphism з повною адаптивністю під мобільні пристрої.
+    *   **Robustness:** Автоматичний fallback на стандартні OSM тайли карти та англомовну Вікіпедію у разі проблем з DNS.
+
+## 🚀 Інструкція із запуску
+
+### Попередні вимоги
+*   Node.js (рекомендовано LTS версію)
+*   npm (встановлюється разом з Node.js)
+
+### Крок 1: Встановлення залежностей
+У кореневій директорії проекту виконайте:
 ```bash
-ng serve
+npm install
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
+### Крок 2: Запуск у режимі розробки
+Для запуску локального сервера (за замовчуванням `http://localhost:4200`):
 ```bash
-ng generate component component-name
+npm start
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
+### Крок 3: Збірка для продакшну
+Для генерації оптимізованих артефактів у папці `dist/`:
 ```bash
-ng generate --help
+npm run build
 ```
 
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## 🔑 Ключові файли конфігурації
+*   `src/app/services/places.service.ts` — ядро пошукової логіки та інтеграції API.
+*   `src/app/interceptors/api.interceptor.ts` — глобальна обробка помилок та логування.
+*   `src/app/pages/search/search.page.ts` — логіка головного екрана та автозаповнення.
